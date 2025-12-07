@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surpresa especial — Juntos há</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#b71818;
+  --card:#d22;
+  --card-dark:#bd1a1a;
+  --accent:white;
+}
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  background:var(--bg);
+  font-family:'Montserrat',sans-serif;
+  color:var(--accent);
+}
+
+#main-content{
+  max-width:600px;
+  margin:auto;
+  padding:26px;
+  padding-bottom:140px;
+  display:none;
+}
+
+header{
+  text-align:center;
+  margin-bottom:20px;
+  position:relative;
+}
+
+#modeBtn{
+  position:absolute;
+  right:0;
+  top:0;
+  font-size:28px;
+  background:none;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+.title{
+  font-family:'Great Vibes',cursive;
+  font-size:48px;
+  margin-top:40px;
+}
+
+.text{
+  font-size:18px;
+  line-height:1.6;
+  margin:20px 0;
+}
+
+.subtitle{
+  font-family:'Great Vibes',cursive;
+  font-size:40px;
+  text-align:center;
+  margin:30px 0 15px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.card{
+  background:linear-gradient(180deg,var(--card),var(--card-dark));
+  padding:18px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 6px 12px rgba(0,0,0,.3);
+}
+
+.number{
+  font-size:38px;
+  font-weight:700;
+}
+
+/* GALERIA */
+.gallery-wrapper{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.gallery{
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  max-width:280px;
+}
+.gallery::-webkit-scrollbar{display:none;}
+
+.photo-card{
+  min-width:260px;
+  background:#c01818;
+  padding:14px;
+  border-radius:14px;
+  scroll-snap-align:center;
+  box-shadow:0 6px 12px rgba(0,0,0,.25);
+  text-align:center;
+}
+
+.photo{
+  height:220px;
+  border-radius:10px;
+  background-size:cover;
+  background-position:center;
+}
+
+.caption{
+  margin-top:10px;
+}
+
+.gallery-arrow{
+  background:#ff4b4b;
+  border:none;
+  color:white;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+/* TIMELINE */
+.timeline{
+  margin-top:40px;
+  border-left:3px solid rgba(255,255,255,.6);
+  padding-left:18px;
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.timeline-item h4{
+  margin:0;
+}
+
+.timeline-date{
+  font-size:14px;
+  opacity:.9;
+}
+
+.timeline-text{
+  margin-top:6px;
+  line-height:1.5;
+}
+
+/* PLAYER */
+.music-player{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#111;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  z-index:50;
+}
+
+.controls{
+  margin-left:auto;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* START */
+#start-screen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#b71818;
+  z-index:100;
+}
+
+#open-gift{
+  padding:18px 32px;
+  font-size:22px;
+  border:none;
+  border-radius:14px;
+  font-weight:700;
+}
+
+/* HEARTS */
+.hearts-container{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+}
+.heart{
+  position:absolute;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts-container" id="hearts"></div>
+
+<div id="start-screen">
+  <button id="open-gift">Seu Presente Especial 🎁</button>
+</div>
+
+<div id="main-content">
+
+<header>
+<button id="modeBtn" onclick="toggleMode()">🌙</button>
+<div class="title">Don Pabllo e Vinícius</div>
+</header>
+
+<p class="text">
+Você é a estrela que guia meu caminho, a melodia que embala meus dias e o calor que aquece minha alma.
+</p>
+
+<div class="subtitle">Juntos há</div>
+
+<section class="grid">
+<div class="card"><div id="years" class="number">0</div>anos</div>
+<div class="card"><div id="months" class="number">0</div>meses</div>
+<div class="card"><div id="days" class="number">0</div>dias</div>
+<div class="card"><div id="hours" class="number">0</div>horas</div>
+<div class="card"><div id="minutes" class="number">0</div>minutos</div>
+<div class="card"><div id="seconds" class="number">0</div>segundos</div>
+</section>
+
+<div class="subtitle">Nossos Momentos</div>
+
+<div class="gallery-wrapper">
+<button class="gallery-arrow left-arrow">←</button>
+
+<div class="gallery">
+<div class="photo-card"><div class="photo" style="background-image:url('image/image1.jpg')"></div><p class="caption">Amar você é minha parte favorita</p></div>
+<div class="photo-card"><div class="photo" style="background-image:url('image/image2.jpg')"></div><p class="caption">Aqui eu fui feliz</p></div>
+<div class="photo-card"><div class="photo" style="background-image:url('image/image3.jpg')"></div><p class="caption">Apaixonados sempre</p></div>
+<div class="photo-card"><div class="photo" style="background-image:url('image/image4.jpg')"></div><p class="caption">Com você é diferente</p></div>
+<div class="photo-card"><div class="photo" style="background-image:url('image/image5.jpg')"></div><p class="caption">Mais um capítulo</p></div>
+<div class="photo-card"><div class="photo" style="background-image:url('image/image6.jpg')"></div><p class="caption">Sempre nós</p></div>
+<div class="photo-card"><div class="photo" style="background-image:url('image/image8.jpg')"></div><p class="caption">Já era amor</p></div>
+<div class="photo-card"><div class="photo" style="background-image:url('image/image9.jpg')"></div><p class="caption">Meu lugar é você</p></div>
+</div>
+
+<button class="gallery-arrow right-arrow">→</button>
+</div>
+
+<div class="timeline">
+<div class="timeline-item"><h4>Conhecemos</h4><div class="timeline-date">13 Nov 2024</div><p class="timeline-text">Tudo começou aqui.</p></div>
+<div class="timeline-item"><h4>Primeiros Pedidos</h4><div class="timeline-date">07 Dez 2024</div><p class="timeline-text">Mudou tudo.</p></div>
+<div class="timeline-item"><h4>Morar Juntos</h4><div class="timeline-date">24 Dez 2024</div><p class="timeline-text">Viramos lar.</p></div>
+<div class="timeline-item"><h4>Pedido Formal</h4><div class="timeline-date">01 Jan 2025</div><p class="timeline-text">Ano novo, amor novo.</p></div>
+</div>
+
+</div>
+
+<div class="music-player">
+<img src="image/perfectimage.jpeg" width="48">
+<div><strong>Perfect</strong><br>Ed Sheeran</div>
+<div class="controls">▶️</div>
+<audio id="player" src="music/perfect.mp3"></audio>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ===== REFERÊNCIAS CORRETAS ===== */
+  const openGiftBtn = document.getElementById('open-gift');
+  const startScreen = document.getElementById('start-screen');
+  const mainContent = document.getElementById('main-content');
+  const hearts = document.getElementById('hearts');
+
+  /* ===== CONTADOR ===== */
+  const startedAt = new Date("2024-11-13T23:00:00");
+
+  function updateCounter(){
+    let s = Math.floor((Date.now() - startedAt) / 1000);
+
+    const y = Math.floor(s / 31536000); s %= 31536000;
+    const m = Math.floor(s / 2592000);  s %= 2592000;
+    const d = Math.floor(s / 86400);    s %= 86400;
+    const h = Math.floor(s / 3600);     s %= 3600;
+    const min = Math.floor(s / 60);     s %= 60;
+
+    document.getElementById('years').textContent = y;
+    document.getElementById('months').textContent = m;
+    document.getElementById('days').textContent = d;
+    document.getElementById('hours').textContent = h;
+    document.getElementById('minutes').textContent = min;
+    document.getElementById('seconds').textContent = s;
+  }
+
+  updateCounter();
+  setInterval(updateCounter, 1000);
+
+  /* ===== BOTÃO DO PRESENTE (AQUI ESTAVA O BUG) ===== */
+  openGiftBtn.addEventListener('click', () => {
+    startScreen.style.display = 'none';
+    mainContent.style.display = 'block';
+  });
+
+  /* ===== GALERIA ===== */
+  const gallery = document.querySelector('.gallery');
+  document.querySelector('.left-arrow').onclick =
+    () => gallery.scrollBy({ left: -280, behavior: 'smooth' });
+
+  document.querySelector('.right-arrow').onclick =
+    () => gallery.scrollBy({ left: 280, behavior: 'smooth' });
+
+  /* ===== PLAYER ===== */
+  const audio = document.getElementById('player');
+  const controls = document.querySelector('.controls');
+  let playing = false;
+
+  controls.onclick = () => {
+    playing = !playing;
+    if (playing) {
+      audio.play();
+      controls.textContent = '⏸️';
+    } else {
+      audio.pause();
+      controls.textContent = '▶️';
+    }
+  };
+
+  /* ===== CORAÇÕES ===== */
+  function createHeart(){
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = '❤️';
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = '20px';
+    h.style.animationDuration = '5s';
+    hearts.appendChild(h);
+    setTimeout(() => h.remove(), 5000);
+  }
+
+  setInterval(createHeart, 500);
+
+});
+</script>
+
+</body>
+</html>
