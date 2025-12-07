@@ -307,75 +307,77 @@ Você é a estrela que guia meu caminho, a melodia que embala meus dias e o calo
 </div>
 
 <script>
-console.log('SCRIPT CARREGADO');
-document.addEventListener("DOMContentLoaded",function(){
-openGiftBtn.addEventListener('click', () => {
+/* ===== BOTÃO DO PRESENTE ===== */
+const openGiftBtn = document.getElementById('open-gift');
+const startScreen = document.getElementById('start-screen');
+const mainContent = document.getElementById('main-content');
+
+openGiftBtn.onclick = () => {
   startScreen.style.display = 'none';
   mainContent.style.display = 'block';
-});
-
-
-/* BOTÃO */
-document.getElementById("open-gift").onclick=()=>{
-  document.getElementById("start-screen").style.display="none";
-  document.getElementById("main-content").style.display="block";
 };
 
-/* CONTADOR */
-const start=new Date("2024-11-13T23:00");
-setInterval(()=>{
-  let s=Math.floor((Date.now()-start)/1000);
-  const y=Math.floor(s/31536000);s%=31536000;
-  const m=Math.floor(s/2592000);s%=2592000;
-  const d=Math.floor(s/86400);s%=86400;
-  const h=Math.floor(s/3600);s%=3600;
-  const min=Math.floor(s/60);s%=60;
-  years.textContent=y;months.textContent=m;days.textContent=d;
-  hours.textContent=h;minutes.textContent=min;seconds.textContent=s;
-},1000);
+/* ===== CONTADOR ===== */
+const startedAt = new Date("2024-11-13T23:00:00");
 
-/* GALERIA */
-let index=0;
-const gallery=document.getElementById("gallery");
-document.getElementById("next").onclick=()=>{index++;gallery.style.transform=`translateX(${-260*index}px)`;}
-document.getElementById("prev").onclick=()=>{index=Math.max(0,index-1);gallery.style.transform=`translateX(${-260*index}px)`;}
+function updateCounter(){
+  let s = Math.floor((Date.now() - startedAt) / 1000);
 
-/* PLAYER */
+  const y = Math.floor(s / 31536000); s %= 31536000;
+  const m = Math.floor(s / 2592000);  s %= 2592000;
+  const d = Math.floor(s / 86400);    s %= 86400;
+  const h = Math.floor(s / 3600);     s %= 3600;
+  const min = Math.floor(s / 60);     s %= 60;
+
+  years.textContent = y;
+  months.textContent = m;
+  days.textContent = d;
+  hours.textContent = h;
+  minutes.textContent = min;
+  seconds.textContent = s;
+}
+
+updateCounter();
+setInterval(updateCounter, 1000);
+
+/* ===== GALERIA ===== */
+const gallery = document.querySelector('.gallery');
+document.querySelector('.left-arrow').onclick =
+  () => gallery.scrollBy({ left: -280, behavior: 'smooth' });
+document.querySelector('.right-arrow').onclick =
+  () => gallery.scrollBy({ left: 280, behavior: 'smooth' });
+
+/* ===== MÚSICA ===== */
 const audio = document.getElementById('player');
 const controls = document.querySelector('.controls');
 let playing = false;
 
-controls.onclick = async () => {
+controls.onclick = () => {
   playing = !playing;
-  try {
-    if (playing) {
-      await audio.play();
-      controls.textContent = '⏸️';
-    } else {
-      audio.pause();
-      controls.textContent = '▶️';
-    }
-  } catch (e) {
-    console.log('Autoplay bloqueado:', e);
-    playing = false;
+  if (playing) {
+    audio.play();
+    controls.textContent = '⏸️';
+  } else {
+    audio.pause();
     controls.textContent = '▶️';
   }
 };
 
+/* ===== CORAÇÕES ===== */
+const hearts = document.getElementById('hearts');
 
-/* CORAÇÕES */
-setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.textContent="❤️";
-  h.style.left=Math.random()*100+"vw";
-  h.style.fontSize="20px";
-  h.style.animationDuration="5s";
-  document.getElementById("hearts").appendChild(h);
-  setTimeout(()=>h.remove(),5000);
-},600);
+function createHeart(){
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.textContent = '❤️';
+  h.style.left = Math.random() * 100 + 'vw';
+  h.style.fontSize = '20px';
+  h.style.animationDuration = '5s';
+  hearts.appendChild(h);
+  setTimeout(() => h.remove(), 5000);
+}
 
-});
+setInterval(createHeart, 500);
 </script>
 
 </body>
