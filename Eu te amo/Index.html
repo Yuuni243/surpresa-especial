@@ -178,11 +178,16 @@ header{
 
 #open-gift{
   padding:18px 32px;
-  font-size:20px;
-  font-weight:700;
+  font-size:22px;
   border:none;
   border-radius:14px;
+  font-weight:700;
+  background:#ffffff;
+  color:#b71818;
+  cursor:pointer;
+  box-shadow:0 6px 14px rgba(0,0,0,.3);
 }
+
 
 /* HEARTS */
 .hearts-container{
@@ -209,6 +214,11 @@ header{
 
 </style>
 </head>
+
+<noscript style="color:white;text-align:center;padding:40px;">
+  Ative o JavaScript para ver o presente ❤️
+</noscript>
+
 
 <body>
 
@@ -298,6 +308,11 @@ Você é a estrela que guia meu caminho, a melodia que embala meus dias e o calo
 
 <script>
 document.addEventListener("DOMContentLoaded",function(){
+openGiftBtn.addEventListener('click', () => {
+  startScreen.style.display = 'none';
+  mainContent.style.display = 'block';
+});
+
 
 /* BOTÃO */
 document.getElementById("open-gift").onclick=()=>{
