@@ -307,6 +307,7 @@ Você é a estrela que guia meu caminho, a melodia que embala meus dias e o calo
 </div>
 
 <script>
+console.log('SCRIPT CARREGADO');
 document.addEventListener("DOMContentLoaded",function(){
 openGiftBtn.addEventListener('click', () => {
   startScreen.style.display = 'none';
@@ -340,12 +341,27 @@ document.getElementById("next").onclick=()=>{index++;gallery.style.transform=`tr
 document.getElementById("prev").onclick=()=>{index=Math.max(0,index-1);gallery.style.transform=`translateX(${-260*index}px)`;}
 
 /* PLAYER */
-const audio=document.getElementById("player");
-const btn=document.getElementById("playBtn");
-btn.onclick=()=>{
-  if(audio.paused){audio.play();btn.textContent="⏸️";}
-  else{audio.pause();btn.textContent="▶️";}
-}
+const audio = document.getElementById('player');
+const controls = document.querySelector('.controls');
+let playing = false;
+
+controls.onclick = async () => {
+  playing = !playing;
+  try {
+    if (playing) {
+      await audio.play();
+      controls.textContent = '⏸️';
+    } else {
+      audio.pause();
+      controls.textContent = '▶️';
+    }
+  } catch (e) {
+    console.log('Autoplay bloqueado:', e);
+    playing = false;
+    controls.textContent = '▶️';
+  }
+};
+
 
 /* CORAÇÕES */
 setInterval(()=>{
