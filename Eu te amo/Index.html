@@ -266,31 +266,26 @@ Você é a estrela que guia meu caminho, a melodia que embala meus dias e o calo
 </div>
 
 <div class="timeline">
-
   <div>
     <h4>Conhecemos</h4>
     <p>13 Nov 2024</p>
     <small>A partir desse dia, tudo ficou mais bonito. Sem pressa, sem medo.</small>
   </div>
-
   <div>
     <h4>Primeiros pedidos</h4>
     <p>07 Dez 2024</p>
     <small>Quando nossos caminhos decidiram andar juntos.</small>
   </div>
-
   <div>
     <h4>Morar juntos</h4>
     <p>24 Dez 2024</p>
     <small>Descobrimos que amor também é lar.</small>
   </div>
-
   <div>
     <h4>Pedido formal</h4>
     <p>01 Jan 2025</p>
     <small>Ano novo, sonhos novos e nós dois.</small>
   </div>
-
 </div>
 
 </div>
@@ -307,10 +302,12 @@ Você é a estrela que guia meu caminho, a melodia que embala meus dias e o calo
 const openGiftBtn = document.getElementById('open-gift');
 const startScreen = document.getElementById('start-screen');
 const mainContent = document.getElementById('main-content');
+const audio = document.getElementById('player');
 
 openGiftBtn.onclick = () => {
   startScreen.style.display = 'none';
   mainContent.style.display = 'block';
+  audio.play().catch(()=>{}); // tocar música após abrir o presente
 };
 
 /* ===== CONTADOR ===== */
@@ -337,15 +334,12 @@ updateCounter();
 setInterval(updateCounter, 1000);
 
 /* ===== GALERIA ===== */
-const gallery = document.querySelector('.gallery');
-document.querySelector('.left-arrow').onclick =
-  () => gallery.scrollBy({ left: -280, behavior: 'smooth' });
-document.querySelector('.right-arrow').onclick =
-  () => gallery.scrollBy({ left: 280, behavior: 'smooth' });
+const gallery = document.getElementById('gallery');
+document.getElementById('prev').onclick = () => gallery.scrollBy({ left: -280, behavior: 'smooth' });
+document.getElementById('next').onclick = () => gallery.scrollBy({ left: 280, behavior: 'smooth' });
 
 /* ===== MÚSICA ===== */
-const audio = document.getElementById('player');
-const controls = document.querySelector('.controls');
+const controls = document.getElementById('playBtn');
 let playing = false;
 
 controls.onclick = () => {
@@ -359,9 +353,20 @@ controls.onclick = () => {
   }
 };
 
+/* ===== MODO CLARO/ESCURO ===== */
+const modeBtn = document.getElementById('modeBtn');
+modeBtn.onclick = () => {
+  if(document.body.style.backgroundColor === 'white'){
+    document.body.style.backgroundColor = 'var(--bg)';
+    document.body.style.color = 'var(--accent)';
+  } else {
+    document.body.style.backgroundColor = 'white';
+    document.body.style.color = 'black';
+  }
+};
+
 /* ===== CORAÇÕES ===== */
 const hearts = document.getElementById('hearts');
-
 function createHeart(){
   const h = document.createElement('div');
   h.className = 'heart';
@@ -372,7 +377,6 @@ function createHeart(){
   hearts.appendChild(h);
   setTimeout(() => h.remove(), 5000);
 }
-
 setInterval(createHeart, 500);
 </script>
 
